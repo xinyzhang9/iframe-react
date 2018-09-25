@@ -103,17 +103,10 @@ class Layout extends React.Component {
     }));
   };
 
-  handleReset = () => {
-    this.setState({
-      activeStep: 0,
-    });
-  };
-  
-
   render() {
     const { classes } = this.props;
     const { activeStep } = this.state;
-    const steps = getSteps();
+
     return (
       <div>
         <PrimarySearchAppBar />
@@ -148,25 +141,10 @@ class Layout extends React.Component {
               className={classes.footer}
             >
               <Paper className={classes.paper}>
-                <div className={classes.actionsContainer}>
-                    <div>
-                      <Button
-                        disabled={activeStep === 0}
-                        onClick={this.handleBack}
-                        className={classes.button}
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={this.handleNext}
-                        className={classes.button}
-                      >
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                      </Button>
-                    </div>
-                  </div>
+                <FooterController 
+                  handleBack={this.handleBack} 
+                  handleNext={this.handleNext} 
+                  activeStep={this.state.activeStep}/>
               </Paper>
             </Grid>
         </Grid>
