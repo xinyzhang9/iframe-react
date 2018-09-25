@@ -13,12 +13,10 @@ const styles = theme => ({
   button: {
     marginTop: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    width: 10,
   },
   actionsContainer: {
-
-  },
-  cancelContainer: {
-    panndingLeft: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 15,
   },
 });
 
@@ -30,7 +28,7 @@ function getSteps() {
 class FooterController extends React.Component {
 
   handleCancel = () =>{
-    
+    alert("Click cancel button");
   }
 
   render() {
@@ -42,10 +40,10 @@ class FooterController extends React.Component {
         <Grid container spacing={12} 
           direction="row"
           justify="space-between"
-          alignItems="flex-start"
+          alignItems="center"
         >
         <Grid item xs={1}>
-          <div className={classes.cancelContainer}>
+          <div>
             <Button
               variant="contained"
               color="primary"
@@ -56,7 +54,8 @@ class FooterController extends React.Component {
             </Button>
           </div>  
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={2} className={classes.actionsContainer}>
+        <div>
             <Button
               disabled={this.props.activeStep === 0}
               onClick={this.props.handleBack}
@@ -72,6 +71,7 @@ class FooterController extends React.Component {
             >
               {this.props.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>
+          </div>
         </Grid>
       </Grid>
       </div>

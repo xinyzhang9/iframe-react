@@ -18,9 +18,9 @@ class IframeContainer extends Component{
      * Called after mounting the component. Triggers initial update of
      * the iframe
      */
-    componentDidMount() {
-        this._updateIframe();
-    }
+    // componentDidMount() {
+    //     this._updateIframe();
+    // }
     
     /**
      * Called each time the props changes. Triggers an update of the iframe to
@@ -42,11 +42,11 @@ class IframeContainer extends Component{
         var step2 = document.getElementsByClassName("step2")[0]
         var step3 = document.getElementsByClassName("step3")[0]
         // console.log(document.getElementsByTagName("body")[0])
-        if(step1 !== undefined && step2 !== undefined && step3 !== undefined) {
-            console.log('1 ',step1.style.display);
-            console.log('2 ',step2.style.display);
-            console.log('3 ',step3.style.display);
-        }
+        // if(step1 !== undefined && step2 !== undefined && step3 !== undefined) {
+        //     console.log('1 ',step1.style.display);
+        //     console.log('2 ',step2.style.display);
+        //     console.log('3 ',step3.style.display);
+        // }
         
         if(this.props.step === 0 & step1 !== undefined){
             step1.style.display = "block"

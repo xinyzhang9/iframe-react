@@ -118,7 +118,7 @@ class Layout extends React.Component {
           className={classes.vertical}
           >
             <Grid container 
-              spacing={16} 
+              spacing={12} 
               direction="row"
               justify="flex-start"
               alignItems="stretch"
