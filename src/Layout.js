@@ -129,7 +129,7 @@ class Layout extends React.Component {
                 </Paper>
               </Grid>
               <Grid item xs={9}>
-                <Paper className={classes.paper} style={{height:"80vh"}}>
+                <Paper className={classes.paper} style={{height:"70vh"}}>
                   <IframeContainer 
                     step={this.state.activeStep}
                   />

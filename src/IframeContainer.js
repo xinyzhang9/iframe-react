@@ -37,16 +37,20 @@ class IframeContainer extends Component{
      */
     _updateIframe() {
         const iframe = this.refs.iframe;
-        const document = iframe.contentDocument;
+        var document = iframe.contentDocument || iframe.contentWindow.document;
         var step1 = document.getElementsByClassName("step1")[0]
         var step2 = document.getElementsByClassName("step2")[0]
         var step3 = document.getElementsByClassName("step3")[0]
         // console.log(document.getElementsByTagName("body")[0])
-        // if(step1 !== undefined && step2 !== undefined && step3 !== undefined) {
-        //     console.log('1 ',step1.style.display);
-        //     console.log('2 ',step2.style.display);
-        //     console.log('3 ',step3.style.display);
-        // }
+        console.log(document);
+        console.log(step1);
+        console.log(step2);
+        console.log(step3);
+        if(step1 !== undefined && step2 !== undefined && step3 !== undefined) {
+            console.log('1 ',step1.style.display);
+            console.log('2 ',step2.style.display);
+            console.log('3 ',step3.style.display);
+        }
         
         if(this.props.step === 0 & step1 !== undefined){
             step1.style.display = "block"
@@ -71,7 +75,7 @@ class IframeContainer extends Component{
     render() {
         return <iframe 
             ref="iframe" 
-            src="step.html" 
+            src="index2.html" 
             width="100%" 
             style={{
                 border:'none',

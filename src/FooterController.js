@@ -37,13 +37,17 @@ class FooterController extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Grid container spacing={12} 
+        <Grid container
           direction="row"
-          justify="space-between"
-          alignItems="center"
+          justify="flex-start"
+          alignItems="flex-start"
         >
-        <Grid item xs={1}>
-          <div>
+        <Grid item xs={3}
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
+        >
             <Button
               variant="contained"
               color="primary"
@@ -52,10 +56,13 @@ class FooterController extends React.Component {
             >
               cancel
             </Button>
-          </div>  
         </Grid>
-        <Grid item xs={2} className={classes.actionsContainer}>
-        <div>
+        <Grid item xs={9}
+          container
+          direction="row"
+          justify="flex-end"
+          alignItems="flex-end"
+        >
             <Button
               disabled={this.props.activeStep === 0}
               onClick={this.props.handleBack}
@@ -71,7 +78,6 @@ class FooterController extends React.Component {
             >
               {this.props.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>
-          </div>
         </Grid>
       </Grid>
       </div>
