@@ -18,6 +18,8 @@ import Paper from '@material-ui/core/Paper';
 import VerticalLinearStepper from './VerticalLinearStepper';
 import FooterController from './FooterController';
 import IframeContainer from './IframeContainer';
+import {getAllSteps} from './StepInformation';
+import {getStepInformation,getStepsMap} from './StepInformation';
 
 const styles = theme => ({
   '@global': {
@@ -59,48 +61,121 @@ const styles = theme => ({
   }
 });
 
-function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
-}
+// function getSteps() {
+//   return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+// }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`;
-    case 1:
-      return 'An ad group contains one or more ads which target a shared set of keywords.';
-    case 2:
-      return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
-    default:
-      return 'Unknown step';
-  }
-}
+// function getStepContent(step) {
+//   switch (step) {
+//     case 0:
+//       return `For each ad campaign that you create, you can control how much
+//               you're willing to spend on clicks and conversions, which networks
+//               and geographical locations you want your ads to show on, and more.`;
+//     case 1:
+//       return 'An ad group contains one or more ads which target a shared set of keywords.';
+//     case 2:
+//       return `Try out different ad text to see what brings in the most customers,
+//               and learn how to enhance your ads using features like ad extensions.
+//               If you run into any problems with your ads, find out how to tell if
+//               they're running and how to resolve approval issues.`;
+//     default:
+//       return 'Unknown step';
+//   }
+// }
 
 
 class Layout extends React.Component {
   state = {
     activeStep: 0,
+    allSteps: 0,
+    activeDeep: 0,
   };
 
+  componentWillMount = () =>{
+    const allSteps = getAllSteps();
+    this.setState(state => ({
+      allSteps: allSteps,
+    }));
+  }
+
   handleNext = () => {
-    if(this.state.activeStep === getSteps().length-1) {
+    if(this.state.activeStep === this.state.allSteps - 1) {
       alert("finished!");
       return;
     }
-    this.setState(state => ({
-      activeStep: state.activeStep + 1,
-    }));
+    var stepMap = getStepsMap();
+    var nextTwoStep = stepMap[this.state.activeStep +2 > (getAllSteps() - 1)?(getAllSteps() - 1):this.state.activeStep +2];
+    var nextStep = stepMap[this.state.activeStep + 1];
+    if(nextTwoStep.indexOf("-") !== -1){
+      var nextTwoStepDeep = 0
+    }
+    nextTwoStepDeep = nextTwoStep.split("-").length -1;
+
+    if(nextTwoStepDeep > this.state.activeDeep){
+      this.setState(state => ({
+        activeDeep: state.activeDeep + 1,
+        activeStep: state.activeStep + 2,
+      }));
+    }else{
+      this.setState(state => ({
+        activeStep: state.activeStep + 1,
+      }));
+    }
+
+    if(nextStep.indexOf("-") !== -1){
+      var nextStepDeep = 0
+    }
+    nextStepDeep = nextStep.split("-").length -1;
+
+    if(nextStepDeep < this.state.activeDeep){
+      this.setState(state => ({
+        activeDeep: state.activeDeep - 1,
+      }));
+    }
+
+
   };
 
   handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1,
-    }));
+    // this.setState(state => ({
+    //   activeStep: state.activeStep - 1,
+    // }));
+    
+    var stepMap = getStepsMap();
+    var step = stepMap[this.state.activeStep];
+    var stepValue = step.split("-");
+    console.log(stepValue[stepValue.length - 1]);
+    var previousDeepChange = stepValue[stepValue.length - 1] === "0";
+    if(previousDeepChange){
+      this.setState(state => ({
+        activeDeep: state.activeDeep - 1,
+        activeStep: state.activeStep - 2,
+      }));
+    }else{
+      this.setState(state => ({
+        activeStep: state.activeStep - 1,
+      }));
+    }
+
+
+    
+    // if(previousTwoStep.indexOf("-") !== -1){
+    //   var previousTwoStepDeep = 0;
+    // }
+    // previousTwoStepDeep = previousTwoStep.split("-").length - 1;
+
+    // if(previousTwoStepDeep - 1 < this.state.activeDeep){
+    //   this.setState(state => ({
+    //     activeDeep: state.activeDeep - 1,
+        
+    //   }));
+    // }else{
+    //   this.setState(state => ({
+    //     activeStep: state.activeStep - 1,
+    //   }));
+    // } 
+    
+
   };
 
   render() {
@@ -125,7 +200,7 @@ class Layout extends React.Component {
               >
               <Grid item xs={3}>
                 <Paper className={classes.paper}>
-                  <VerticalLinearStepper activeStep={activeStep}/>
+                  <VerticalLinearStepper activeStep={activeStep} activeDeep={this.state.activeDeep}/>
                 </Paper>
               </Grid>
               <Grid item xs={9}>
@@ -144,7 +219,8 @@ class Layout extends React.Component {
                 <FooterController 
                   handleBack={this.handleBack} 
                   handleNext={this.handleNext} 
-                  activeStep={this.state.activeStep}/>
+                  activeStep={this.state.activeStep}
+                  allSteps={this.state.allSteps}/>
               </Paper>
             </Grid>
         </Grid>

@@ -5,9 +5,8 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import {getStepInformation,getStepsMap} from './StepInformation';
 
 const styles = theme => ({
   root: {
@@ -25,78 +24,93 @@ const styles = theme => ({
   },
 });
 
-function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
-}
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`;
-    case 1:
-      return 'An ad group contains one or more ads which target a shared set of keywords.';
-    case 2:
-      return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
-    default:
-      return 'Unknown step';
-  }
-}
 
 class VerticalLinearStepper extends React.Component {
 
-  handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1,
-    }));
-  };
+  getStepsMap = (index) =>{
+    var stepMap = getStepsMap();
+    if(stepMap[index].indexOf("-") === -1){
+      // console.log([stepMap[index]])
 
-  handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1,
-    }));
-  };
+      return [stepMap[index]];
+    }
+    var s = stepMap[index].split('-');
+    // console.log(s)
+    return s;
+  }
 
-  handleReset = () => {
-    this.setState({
-      activeStep: 0,
-    });
-  };
+  getStepsTitle = (steps) =>{
+    var stepsTitle = [];
+    for(var i in steps){
+      stepsTitle.push(i)
+    }
+    return stepsTitle;
+  }
+
+  handleChild = (key, steps, parentDeep) =>{
+    var s = this.getStepsMap(this.props.activeStep);
+    if(steps[key].child === null){
+      return steps[key].desc;
+    }else{  
+      // if(steps[key].child.step == s){
+        const subSteps = steps[key].child;
+        const subStepsTitle = this.getStepsTitle(subSteps);
+        return  <Stepper activeStep={parseInt(s[parentDeep+1])} orientation="vertical">
+              {subStepsTitle.map((label,index) => {
+                  return(
+                    <Step key={label}>
+                      <StepLabel>{label}</StepLabel>
+                      <StepContent>
+                        <Typography>
+                          {this.handleChild(subStepsTitle[index], subSteps, parentDeep+1)}
+                        </Typography>
+                      </StepContent>
+                    </Step> 
+                  )}
+                )}                      
+          </Stepper>
+      // }
+
+    }
+  }
   
   render() {
     const { classes } = this.props;
-    const steps = getSteps();
+    const steps = getStepInformation();
+    const stepsTitle = this.getStepsTitle(steps);
+    var s = this.getStepsMap(this.props.activeStep);
+
 
     return (
       <div className={classes.root}>
-        <Stepper activeStep={this.props.activeStep} orientation="vertical">
-          {steps.map((label, index) => {
+        <Stepper activeStep={parseInt(s[0])} orientation="vertical">
+          {stepsTitle.map((label, index) => {
             return (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
                 <StepContent>
-                  <Typography>{getStepContent(index)}</Typography>
+                  <Typography>
+                    <div>
+                      {this.handleChild(stepsTitle[index], steps,0)}
+                    </div>
+                  </Typography>
                 </StepContent>
               </Step>
             );
           })}
         </Stepper>
-        {this.props.activeStep === steps.length && (
+        {/* {this.props.activeStep === steps.length && (
           <Paper square elevation={0} className={classes.resetContainer}>
             <Typography>All steps completed - you&quot;re finished</Typography>
           </Paper>
-        )}
+        )} */}
       </div>
     );
   }
 }
 
-VerticalLinearStepper.propTypes = {
-  classes: PropTypes.object,
-};
+// VerticalLinearStepper.propTypes = {
+//   classes: PropTypes.object,
+// };
 
 export default withStyles(styles)(VerticalLinearStepper);

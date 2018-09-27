@@ -20,9 +20,6 @@ const styles = theme => ({
   },
 });
 
-function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
-}
 
 
 class FooterController extends React.Component {
@@ -33,7 +30,7 @@ class FooterController extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const steps = getSteps();
+    const allSteps = this.props.allSteps;
 
     return (
       <div className={classes.root}>
@@ -76,7 +73,7 @@ class FooterController extends React.Component {
               onClick={this.props.handleNext}
               className={classes.button}
             >
-              {this.props.activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              {this.props.activeStep === allSteps - 1 ? 'Finish' : 'Next'}
             </Button>
         </Grid>
       </Grid>
