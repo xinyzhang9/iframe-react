@@ -7,8 +7,9 @@ export default class Auth {
     domain: AUTH_CONFIG.domain,
     clientID: AUTH_CONFIG.clientId,
     redirectUri: AUTH_CONFIG.callbackUrl,
+    audience: AUTH_CONFIG.apiUrl,
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: 'openid read:courses'
   });
 
   constructor() {
@@ -16,6 +17,7 @@ export default class Auth {
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
+    this.getAccessToken = this.getAccessToken.bind(this);
   }
 
   login() {
