@@ -100,81 +100,67 @@ class Layout extends React.Component {
   }
 
   handleNext = () => {
-    if(this.state.activeStep === this.state.allSteps - 1) {
-      alert("finished!");
-      return;
-    }
-    var stepMap = getStepsMap();
-    var nextTwoStep = stepMap[this.state.activeStep +2 > (getAllSteps() - 1)?(getAllSteps() - 1):this.state.activeStep +2];
-    var nextStep = stepMap[this.state.activeStep + 1];
-    if(nextTwoStep.indexOf("-") !== -1){
-      var nextTwoStepDeep = 0
-    }
-    nextTwoStepDeep = nextTwoStep.split("-").length -1;
+    // if(this.state.activeStep === this.state.allSteps - 1) {
+    //   alert("finished!");
+    //   return;
+    // }
+    // var stepMap = getStepsMap();
+    // var nextTwoStep = stepMap[this.state.activeStep +2 > (getAllSteps() - 1)?(getAllSteps() - 1):this.state.activeStep +2];
+    // var nextStep = stepMap[this.state.activeStep + 1];
+    // if(nextTwoStep.indexOf("-") !== -1){
+    //   var nextTwoStepDeep = 0
+    // }
+    // nextTwoStepDeep = nextTwoStep.split("-").length -1;
 
-    if(nextTwoStepDeep > this.state.activeDeep){
-      this.setState(state => ({
-        activeDeep: state.activeDeep + 1,
-        activeStep: state.activeStep + 2,
-      }));
-    }else{
-      this.setState(state => ({
-        activeStep: state.activeStep + 1,
-      }));
-    }
+    // if(nextTwoStepDeep > this.state.activeDeep){
+    //   this.setState(state => ({
+    //     activeDeep: state.activeDeep + 1,
+    //     activeStep: state.activeStep + 2,
+    //   }));
+    // }else{
+    //   this.setState(state => ({
+    //     activeStep: state.activeStep + 1,
+    //   }));
+    // }
 
-    if(nextStep.indexOf("-") !== -1){
-      var nextStepDeep = 0
-    }
-    nextStepDeep = nextStep.split("-").length -1;
+    // if(nextStep.indexOf("-") !== -1){
+    //   var nextStepDeep = 0
+    // }
+    // nextStepDeep = nextStep.split("-").length -1;
 
-    if(nextStepDeep < this.state.activeDeep){
-      this.setState(state => ({
-        activeDeep: state.activeDeep - 1,
-      }));
-    }
-
+    // if(nextStepDeep < this.state.activeDeep){
+    //   this.setState(state => ({
+    //     activeDeep: state.activeDeep - 1,
+    //   }));
+    // }
+    this.setState(state => ({
+          activeStep: state.activeStep + 1,
+        }));
 
   };
 
   handleBack = () => {
-    // this.setState(state => ({
-    //   activeStep: state.activeStep - 1,
-    // }));
     
-    var stepMap = getStepsMap();
-    var step = stepMap[this.state.activeStep];
-    var stepValue = step.split("-");
-    console.log(stepValue[stepValue.length - 1]);
-    var previousDeepChange = stepValue[stepValue.length - 1] === "0";
-    if(previousDeepChange){
-      this.setState(state => ({
-        activeDeep: state.activeDeep - 1,
-        activeStep: state.activeStep - 2,
-      }));
-    }else{
-      this.setState(state => ({
-        activeStep: state.activeStep - 1,
-      }));
-    }
-
-
-    
-    // if(previousTwoStep.indexOf("-") !== -1){
-    //   var previousTwoStepDeep = 0;
-    // }
-    // previousTwoStepDeep = previousTwoStep.split("-").length - 1;
-
-    // if(previousTwoStepDeep - 1 < this.state.activeDeep){
+    // var stepMap = getStepsMap();
+    // var step = stepMap[this.state.activeStep];
+    // var stepValue = step.split("-");
+    // console.log(stepValue[stepValue.length - 1]);
+    // var previousDeepChange = stepValue[stepValue.length - 1] === "0";
+    // if(previousDeepChange){
     //   this.setState(state => ({
     //     activeDeep: state.activeDeep - 1,
-        
+    //     activeStep: state.activeStep - 2,
     //   }));
     // }else{
     //   this.setState(state => ({
     //     activeStep: state.activeStep - 1,
     //   }));
-    // } 
+    // }
+
+    this.setState(state => ({
+      activeStep: state.activeStep - 1,
+    }));
+  
     
 
   };
@@ -202,7 +188,7 @@ class Layout extends React.Component {
               <Grid item xs={3}>
                 <Paper className={classes.paper}>
                   {/* <VerticalLinearStepper activeStep={activeStep} activeDeep={this.state.activeDeep}/> */}
-                  <NavigateTree />
+                  <NavigateTree activeStep={this.state.activeStep} activeDeep={this.state.activeDeep}/>
                 </Paper>
               </Grid>
               <Grid item xs={9}>
