@@ -1,0 +1,105 @@
+body {
+  display: block;
+}
+ ul,  li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ li {
+  padding-left: 0px;
+  line-height: .6em;
+  position: relative;
+}
+ li p {
+  margin: 0;
+  background: white;
+  position: relative;
+  top: -14px;
+  display: inline-block;
+  color: #0079ef;
+}
+ li > i {
+  display: inline-block;
+  background-size: 18px 36px;
+  width: 18px;
+  height: 36px;
+}
+ li:first-child.active > .tree-icon-left {
+  background: url("../../images/navigation/current-start.svg") no-repeat;
+}
+ li:last-child.active > .tree-icon-left {
+  background: url("../../images/navigation/current-end.svg") no-repeat;
+}
+ li:first-child.completed > .tree-icon-left {
+  background: url("../../images/navigation/done-start.svg") no-repeat;
+}
+ li:last-child.completed > .tree-icon-left {
+  background: url("../../images/navigation/done-end.svg") no-repeat;
+}
+ li:first-child > .tree-icon-left {
+  background: url("../../images/navigation/todo.svg") no-repeat;
+}
+ li:last-child > .tree-icon-left {
+  background: url("../../images/navigation/todo-end.svg") no-repeat;
+}
+ li.active > .tree-icon-left {
+  background: url("../../images/navigation/current.svg") no-repeat;
+}
+ li.active > p {
+  color: #0079ef;
+  font-weight: 600;
+}
+ li.completed > p {
+  color: #0079ef;
+}
+ li.completed > .tree-icon-left {
+  background: url("../../images/navigation/done.svg") no-repeat;
+}
+ li .tree-icon-left {
+  background: url("../../images/navigation/todo.svg") no-repeat;
+}
+ li:first-child.tree-container > .tree-icon-left {
+  background: url("../../images/navigation/junction-start.svg") no-repeat;
+}
+ li:last-child.tree-container.expanded > .tree-icon-left {
+  background: url("../../images/navigation/junction-end.svg") no-repeat;
+}
+ li:last-child.tree-container.expanded > .tree-icon-right {
+  background: url("../../images/navigation/ellbow.svg") no-repeat;
+}
+ li.tree-container:last-child >  {
+  border-left: 1px solid transparent;
+}
+ li.tree-container >  {
+  display: none;
+  border-left: 1px solid #ccc;
+  margin-left: 9px;
+}
+ li.tree-container.expanded > p {
+  color: #0079ef;
+}
+ li.tree-container.expanded >  {
+  display: block;
+}
+ li.tree-container.expanded > .tree-icon-left {
+  background: url("../../images/navigation/junction.svg") no-repeat;
+}
+ li.tree-container.expanded > .tree-icon-right {
+  background: url("../../images/navigation/ellbow.svg") no-repeat;
+}
+ li.tree-container.active > .tree-icon-left {
+  background: url("../../images/navigation/junction.svg") no-repeat;
+}
+ li.tree-container li {
+  padding-left: 8px;
+}
+ li.tree-container li:first-child.active > .tree-icon-left {
+  background: url("../../images/navigation/current.svg") no-repeat;
+}
+ li.tree-container li:last-child.active > .tree-icon-left {
+  background: url("../../images/navigation/current-end.svg") no-repeat;
+}
+ li.tree-container li:first-child.completed > .tree-icon-left {
+  background: url("../../images/navigation/done.svg") no-repeat;
+}

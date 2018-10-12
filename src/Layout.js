@@ -20,6 +20,7 @@ import FooterController from './FooterController';
 import IframeContainer from './IframeContainer';
 import {getAllSteps} from './StepInformation';
 import {getStepInformation,getStepsMap} from './StepInformation';
+import NavigateTree from './components/NavigateTree';
 
 const styles = theme => ({
   '@global': {
@@ -200,7 +201,8 @@ class Layout extends React.Component {
               >
               <Grid item xs={3}>
                 <Paper className={classes.paper}>
-                  <VerticalLinearStepper activeStep={activeStep} activeDeep={this.state.activeDeep}/>
+                  {/* <VerticalLinearStepper activeStep={activeStep} activeDeep={this.state.activeDeep}/> */}
+                  <NavigateTree />
                 </Paper>
               </Grid>
               <Grid item xs={9}>
