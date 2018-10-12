@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import { Divider } from '@material-ui/core';
 import '../css/components/NavigateTree.css';
 
 
@@ -42,6 +39,20 @@ class NavigateTree extends React.Component {
         <li className="tree-container expanded">
         <i className="tree-icon-left"></i><i className="tree-icon-right"></i>
         <p>step 2</p>
+        <ul>
+          <li className="completed">
+          <i className="tree-icon-left"></i><i className="tree-icon-right"></i>
+          <p>step 1</p>
+          </li>
+          <li className="tree-container expanded">
+          <i className="tree-icon-left"></i><i className="tree-icon-right"></i>
+          <p>step 2</p>
+          </li>
+          <li className="">
+          <i className="tree-icon-left"></i><i className="tree-icon-right"></i>
+          <p>step 3</p>
+          </li>
+        </ul>
         </li>
         <li className="">
         <i className="tree-icon-left"></i><i className="tree-icon-right"></i>

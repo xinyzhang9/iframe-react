@@ -68,10 +68,10 @@ body {
  li:last-child.tree-container.expanded > .tree-icon-right {
   background: url("../../images/navigation/ellbow.svg") no-repeat;
 }
- li.tree-container:last-child >  {
+ li.tree-container:last-child >  ul {
   border-left: 1px solid transparent;
 }
- li.tree-container >  {
+ li.tree-container > ul {
   display: none;
   border-left: 1px solid #ccc;
   margin-left: 9px;
@@ -79,7 +79,7 @@ body {
  li.tree-container.expanded > p {
   color: #0079ef;
 }
- li.tree-container.expanded >  {
+ li.tree-container.expanded > ul {
   display: block;
 }
  li.tree-container.expanded > .tree-icon-left {
