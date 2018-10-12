@@ -20,6 +20,7 @@ import FooterController from './FooterController';
 import IframeContainer from './IframeContainer';
 import {getAllSteps} from './StepInformation';
 import {getStepInformation,getStepsMap} from './StepInformation';
+import Tree from './components/StepTree/Tree';
 
 const styles = theme => ({
   '@global': {
@@ -89,6 +90,7 @@ class Layout extends React.Component {
     activeStep: 0,
     allSteps: 0,
     activeDeep: 0,
+    isFinish: false,
   };
 
   componentWillMount = () =>{
@@ -157,7 +159,6 @@ class Layout extends React.Component {
       }));
     }
 
-
     
     // if(previousTwoStep.indexOf("-") !== -1){
     //   var previousTwoStepDeep = 0;
@@ -176,6 +177,16 @@ class Layout extends React.Component {
     // } 
     
 
+  };
+
+  onReceiveMessage = (msg) => {
+    console.log(msg)
+    if(msg.data === "finish"){
+      console.log("finish ")
+      this.setState(state => ({
+        isFinish: true,
+      }));
+    }
   };
 
   render() {
@@ -200,13 +211,15 @@ class Layout extends React.Component {
               >
               <Grid item xs={3}>
                 <Paper className={classes.paper}>
-                  <VerticalLinearStepper activeStep={activeStep} activeDeep={this.state.activeDeep}/>
+                  {/* <VerticalLinearStepper activeStep={activeStep} activeDeep={this.state.activeDeep}/> */}
+                  <Tree />
                 </Paper>
               </Grid>
               <Grid item xs={9}>
                 <Paper className={classes.paper} style={{height:"70vh"}}>
                   <IframeContainer 
-                    step={this.state.activeStep}
+                    postMessageData={this.state.activeStep}
+                    onReceiveMessage={this.onReceiveMessage}
                   />
                 </Paper>
               </Grid>
@@ -220,7 +233,8 @@ class Layout extends React.Component {
                   handleBack={this.handleBack} 
                   handleNext={this.handleNext} 
                   activeStep={this.state.activeStep}
-                  allSteps={this.state.allSteps}/>
+                  allSteps={this.state.allSteps}
+                  isFinish={this.state.isFinish}/>
               </Paper>
             </Grid>
         </Grid>

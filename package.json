@@ -7,6 +7,7 @@
     "@material-ui/icons": "^3.0.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-iframe-comm": "^1.2.2",
     "react-scripts": "1.1.5"
   },
   "scripts": {
@@ -14,5 +15,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.1.0"
   }
 }

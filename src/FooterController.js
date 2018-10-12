@@ -73,7 +73,7 @@ class FooterController extends React.Component {
               onClick={this.props.handleNext}
               className={classes.button}
             >
-              {this.props.activeStep === allSteps - 1 ? 'Finish' : 'Next'}
+              {this.props.isFinish ? 'Finish' : 'Next'}
             </Button>
         </Grid>
       </Grid>
